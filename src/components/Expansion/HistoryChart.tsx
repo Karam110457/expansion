@@ -34,7 +34,7 @@ const HistoryChart = ({ history }: HistoryChartProps) => {
                     <Tooltip
                         cursor={{ fill: '#1e1e1e' }}
                         contentStyle={{ backgroundColor: '#1e1e1e', border: '1px solid #333', borderRadius: '8px', color: '#fff' }}
-                        formatter={(value: number) => [value, 'Score']}
+                        formatter={(value: number | undefined) => [value ?? 0, 'Score']}
                     />
                     <Bar dataKey="score" radius={[4, 4, 0, 0]}>
                         {data.map((entry, index) => (

@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { supabase } from '../lib/supabase';
-import type { ExpansionDay, ExpansionDayInsert, ExpansionMode, MicroNovelty, EnvironmentValue } from '../lib/database.types';
+import type { ExpansionDay, ExpansionDayInsert, ExpansionDayUpdate, ExpansionMode, MicroNovelty, EnvironmentValue } from '../lib/database.types';
 import { calculateScore, calculateStreak, detectStagnation } from '../utils/calculateScore';
 import { useAuth } from './useAuth';
 
@@ -52,7 +52,7 @@ export const useExpansionStore = () => {
     const isInitialLoadRef = useRef(true);
 
     // Load all history from Supabase (only on mount and when user changes)
-    const loadHistory = useCallback(async () => {
+    const loadHistory = useCallback(async (): Promise<ExpansionDay[]> => {
         if (!user) return [];
 
         const { data, error } = await supabase
@@ -66,7 +66,7 @@ export const useExpansionStore = () => {
             console.error('Failed to load history:', error);
             return [];
         }
-        return data || [];
+        return (data as ExpansionDay[]) || [];
     }, [user]);
 
     // Initial load
@@ -179,16 +179,16 @@ export const useExpansionStore = () => {
         const existingDay = history.find(d => d.date === selectedDate);
 
         if (existingDay) {
-            const { error } = await supabase
-                .from('expansion_days')
-                .update(dayData)
+            const { error } = await (supabase
+                .from('expansion_days') as any)
+                .update(dayData as ExpansionDayUpdate)
                 .eq('date', selectedDate)
                 .eq('user_id', user.id);
             if (error) console.error('Failed to update day:', error);
         } else {
-            const { error } = await supabase
-                .from('expansion_days')
-                .insert(dayData);
+            const { error } = await (supabase
+                .from('expansion_days') as any)
+                .insert(dayData as ExpansionDayInsert);
             if (error) console.error('Failed to insert day:', error);
         }
 
