@@ -1,4 +1,53 @@
-# React + TypeScript + Vite
+# Expansion Tracker
+
+A React + TypeScript + Vite application for tracking expansion metrics.
+
+## Environment Variables
+
+This project requires the following environment variables:
+
+- `VITE_SUPABASE_URL` - Your Supabase project URL
+- `VITE_SUPABASE_ANON_KEY` - Your Supabase anonymous key
+
+Create a `.env.local` file in the root directory with these variables for local development.
+
+## Deployment to Vercel
+
+### Prerequisites
+1. A Vercel account
+2. Your project connected to a GitHub repository
+
+### Steps to Deploy
+
+1. **Push your code to GitHub** (if not already done):
+   ```bash
+   git add .
+   git commit -m "Prepare for Vercel deployment"
+   git push origin main
+   ```
+
+2. **Import your project to Vercel**:
+   - Go to [vercel.com](https://vercel.com)
+   - Click "Add New Project"
+   - Import your GitHub repository
+   - Vercel will auto-detect Vite settings
+
+3. **Configure Environment Variables**:
+   - In your Vercel project settings, go to "Environment Variables"
+   - Add the following:
+     - `VITE_SUPABASE_URL`: `https://zeowjikcjreeprjeokra.supabase.co`
+     - `VITE_SUPABASE_ANON_KEY`: Your Supabase anon key
+   - Make sure to add them for all environments (Production, Preview, Development)
+
+4. **Deploy**:
+   - Click "Deploy"
+   - Vercel will automatically build and deploy your app
+
+The `vercel.json` configuration file is already set up for optimal Vite deployment.
+
+---
+
+## Development
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
