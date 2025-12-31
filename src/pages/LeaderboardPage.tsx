@@ -4,11 +4,12 @@ import { supabase } from '../lib/supabase';
 import { Trophy, Calendar, TrendingUp, Clock, ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface LeaderboardEntry {
-    display_name: string;
+    display_name: string | null;
     score: number;
     mode: string;
     date?: string;
 }
+
 
 type ViewType = 'daily' | 'weekly' | 'alltime';
 

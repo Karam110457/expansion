@@ -64,7 +64,7 @@ export interface Database {
                     created_at?: string
                     updated_at?: string
                 }
-
+                Relationships: []
             }
             custom_novelties: {
                 Row: {
@@ -94,7 +94,17 @@ export interface Database {
                     created_at?: string
                     updated_at?: string
                 }
+                Relationships: []
             }
+        }
+        Views: {
+            [_ in never]: never
+        }
+        Functions: {
+            [_ in never]: never
+        }
+        Enums: {
+            [_ in never]: never
         }
     }
 }
@@ -111,6 +121,10 @@ export interface MicroNovelty {
 export type ExpansionDay = Database['public']['Tables']['expansion_days']['Row']
 export type ExpansionDayInsert = Database['public']['Tables']['expansion_days']['Insert']
 export type ExpansionDayUpdate = Database['public']['Tables']['expansion_days']['Update']
+
+export type CustomNoveltyRow = Database['public']['Tables']['custom_novelties']['Row']
+export type CustomNoveltyInsert = Database['public']['Tables']['custom_novelties']['Insert']
+export type CustomNoveltyUpdate = Database['public']['Tables']['custom_novelties']['Update']
 
 export type ExpansionMode = 'building' | 'expanding'
 export type EnvironmentValue = number // Now 0-1 range with 0.1 increments
