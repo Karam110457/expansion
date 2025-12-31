@@ -1,6 +1,6 @@
 import { useExpansionStore } from '../hooks/useExpansionStore';
 import ScoreDisplay from '../components/Expansion/ScoreDisplay';
-import EnvironmentSlider from '../components/Expansion/EnvironmentSlider';
+import EnvironmentArchetype from '../components/Expansion/EnvironmentArchetype';
 import ModeToggle from '../components/Expansion/ModeToggle';
 import MicroNoveltyChecklist from '../components/Expansion/MicroNoveltyChecklist';
 import MacroNoveltySlider from '../components/Expansion/MacroNoveltySlider';
@@ -10,6 +10,7 @@ import StagnationAlert from '../components/Expansion/StagnationAlert';
 import StatsView from '../components/Expansion/StatsView';
 import { Brain, Trash2, Zap, Flame, Calendar, Check, Loader2, BarChart3 } from 'lucide-react';
 import type { MicroNovelty, ExpansionMode } from '../lib/database.types';
+
 
 const TrackerPage = () => {
   const {
@@ -91,12 +92,13 @@ const TrackerPage = () => {
         {/* Environment - Only show in Building mode */}
         {dayState.mode === 'building' && (
           <section className="glass-card p-5">
-            <EnvironmentSlider
+            <EnvironmentArchetype
               value={dayState.environment}
               onChange={(val: number) => updateField('environment', val)}
             />
           </section>
         )}
+
 
         {/* Auto E=1.0 notice for Expanding */}
         {dayState.mode === 'expanding' && (
