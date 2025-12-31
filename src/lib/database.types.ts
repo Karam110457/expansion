@@ -72,10 +72,15 @@ export interface Database {
 
 export interface MicroNovelty {
     newBook: boolean       // New knowledge input
+    newBookText?: string  // Custom text for new book
     newPerson: boolean     // New conversation
+    newPersonText?: string // Custom text for new person
     newMethod: boolean     // New technique/approach
+    newMethodText?: string // Custom text for new method
     newPlace: boolean      // Worked from new spot
+    newPlaceText?: string  // Custom text for new place
     newChallenge: boolean  // Tackled something difficult
+    newChallengeText?: string // Custom text for new challenge
 }
 
 
@@ -84,5 +89,5 @@ export type ExpansionDayInsert = Database['public']['Tables']['expansion_days'][
 export type ExpansionDayUpdate = Database['public']['Tables']['expansion_days']['Update']
 
 export type ExpansionMode = 'building' | 'expanding'
-export type EnvironmentValue = 0.1 | 0.5 | 0.8 | 1.0
+export type EnvironmentValue = number // 0 to 1, increments of 0.1
 
