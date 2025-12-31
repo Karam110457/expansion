@@ -149,8 +149,8 @@ export const getInsight = (
     }
 
     // Priority 2: Critical state
-    if (environment <= 0.2) {
-        return "🚨 The Room is a trap. Your multiplier is low. Get to a Third Space and watch your score jump.";
+    if (environment === 0.1) {
+        return "🚨 The Room is a trap. Your multiplier is 0.1x. Get to a Third Space and watch your score jump 10x.";
     }
 
     if (sludgeGap > 2) {

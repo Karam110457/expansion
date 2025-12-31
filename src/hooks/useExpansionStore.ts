@@ -8,15 +8,10 @@ const getTodayString = () => new Date().toISOString().split('T')[0];
 
 const DEFAULT_MICRO_NOVELTY: MicroNovelty = {
     newBook: false,
-    newBookText: '',
     newPerson: false,
-    newPersonText: '',
     newMethod: false,
-    newMethodText: '',
     newPlace: false,
-    newPlaceText: '',
     newChallenge: false,
-    newChallengeText: '',
 };
 
 
@@ -34,7 +29,7 @@ interface DayState {
 
 const DEFAULT_DAY_STATE: DayState = {
     mode: 'building',
-    environment: 0.5, // Can be any value from 0 to 1 in 0.1 increments
+    environment: 0.5,
     businessFocus: 0,
     trainingFocus: 0,
     microNovelty: DEFAULT_MICRO_NOVELTY,
@@ -89,19 +84,12 @@ export const useExpansionStore = () => {
             // Load today's data if exists
             const todayData = data.find(d => d.date === getTodayString());
             if (todayData) {
-                // Ensure microNovelty has all required fields (backward compatibility)
-                const microNovelty = todayData.micro_novelty as MicroNovelty;
-                const normalizedMicroNovelty: MicroNovelty = {
-                    ...DEFAULT_MICRO_NOVELTY,
-                    ...microNovelty,
-                };
-                
                 setDayState({
                     mode: todayData.mode,
                     environment: todayData.environment as EnvironmentValue,
                     businessFocus: todayData.business_focus,
                     trainingFocus: todayData.training_focus,
-                    microNovelty: normalizedMicroNovelty,
+                    microNovelty: todayData.micro_novelty as MicroNovelty,
                     macroNovelty: todayData.macro_novelty ?? 5,
                     dopamine: todayData.dopamine,
                     clearing: todayData.clearing,
@@ -121,19 +109,12 @@ export const useExpansionStore = () => {
 
         const existingDay = history.find(d => d.date === selectedDate);
         if (existingDay) {
-            // Ensure microNovelty has all required fields (backward compatibility)
-            const microNovelty = existingDay.micro_novelty as MicroNovelty;
-            const normalizedMicroNovelty: MicroNovelty = {
-                ...DEFAULT_MICRO_NOVELTY,
-                ...microNovelty,
-            };
-            
             setDayState({
                 mode: existingDay.mode,
                 environment: existingDay.environment as EnvironmentValue,
                 businessFocus: existingDay.business_focus,
                 trainingFocus: existingDay.training_focus,
-                microNovelty: normalizedMicroNovelty,
+                microNovelty: existingDay.micro_novelty as MicroNovelty,
                 macroNovelty: existingDay.macro_novelty ?? 5,
                 dopamine: existingDay.dopamine,
                 clearing: existingDay.clearing,
